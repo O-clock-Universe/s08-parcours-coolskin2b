@@ -13,7 +13,7 @@ get_header();
         <h2 class="card-title"><a href="<?php the_permalink() ?> title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
         <p class="card-text"><?php the_excerpt()?></p>
         <p class="infos">
-            Posté par <a href="#" class="card-link"><?php the_author() ?></a> le <time><?php the_date() ?></time> dans 
+            Posté par <a href="<?php get_the_author_link()?>" class="card-link"><?php the_author() ?></a> le <time><?php the_date() ?></time> dans 
             <a href="<?php echo get_category_link(the_category_ID(false)); ?>"
             
                 class="card-link">#<?php $cat = get_the_category(); echo $cat[0]->cat_name; ?>
@@ -68,11 +68,23 @@ get_header();
     <div class="card">
         <h3 class="card-header">Auteurs</h3>
         <ul class="list-group list-group-flush">
-                    <?php
-wp_list_authors()
-      ?>
-        </ul>
-    </div>
+        
+        <?php
+$args2 = array(
+
+    role’ => ‘authors’,
+    
+    ‘orderby’ => ‘display_name’,
+    
+    ‘order’ => ‘ASC’
+    
+    );
+    $authors = get_users($arg2);
+    foreach ($authors as $author) {
+        echo '<li class="list-group-item"><a href="?author=' .$author->ID. '">' .$author->display_name. '</a></li>';
+    }
+  ?>
+  
 
 </aside>
 <?php

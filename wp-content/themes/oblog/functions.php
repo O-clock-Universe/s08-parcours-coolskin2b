@@ -13,7 +13,7 @@ if (!function_exists('oblog_setup')) :
         // qui sera identifié par "theme_location" dans le thème
         register_nav_menus([
             'nav bar head' => 'Menu de liens du header navbar ',
-            'nav right' => 'Menu de droite',
+            'navright' => 'navright',
             'authors' => 'authors',
             'nav footer' => 'Menu du footer'
 
@@ -57,18 +57,27 @@ function add_menu_link_class( $atts, $item, $args ) {
       $atts['class'] = $args->link_class;
     }
     return $atts;
-  }
+}
   add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 
+  
 
+  function add_search_box_to_menu( $items, $args ) {
+      if( $args->theme_location == 'navright' )
+          return $items."<li class='menu-header-search'><form action='http://example.com/' id='searchform' method='get'><input type='text' name='s' id='s' placeholder='Search'></form></li>";
+   
+      return $items;
+  }
+  add_filter('wp_nav_menu_items','add_search_box_to_menu', 1, 2);
 // Ceci va appeler la fonction qui charge les scripts
 add_action('wp_enqueue_scripts', 'oblog_scripts');
+
 
 function wpb_add_google_fonts() {
  
     wp_enqueue_style( 'wpb-google-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,800', false ); 
 
-    }
+}
      
     add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
 
