@@ -46,12 +46,28 @@
       ?>
       </div>
     </nav>
-    <section class="text-center">
-      <h1><?php echo get_bloginfo()?></h1>
+    <section class="text-center"><h1>
+    <?php if(is_front_page()): ?>
+            <?php echo get_bloginfo()?></h1>
       <hr />
       <p>
       <?php echo get_bloginfo('description')?>
       </p>
+            <?php elseif(is_category()): ?>
+            <?php echo single_cat_title()?></h1>
+      <hr/>
+      <p>
+      <?php echo get_bloginfo('description')?>
+      </p>
+      <?php elseif(is_single()): ?>
+            <?php echo single_post_title()?></h1>
+      <hr/>
+      <p>
+      <?php echo get_bloginfo('description')?>
+      </p>
+            <?php endif; ?>
+        </h1>
+
     </section>
   </header>
 

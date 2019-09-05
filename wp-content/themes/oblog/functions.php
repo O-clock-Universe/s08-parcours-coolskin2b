@@ -14,6 +14,7 @@ if (!function_exists('oblog_setup')) :
         register_nav_menus([
             'nav bar head' => 'Menu de liens du header navbar ',
             'nav right' => 'Menu de droite',
+            'authors' => 'authors',
             'nav footer' => 'Menu du footer'
 
         ]);
@@ -59,6 +60,7 @@ function add_menu_link_class( $atts, $item, $args ) {
   }
   add_filter( 'nav_menu_link_attributes', 'add_menu_link_class', 1, 3 );
 
+
 // Ceci va appeler la fonction qui charge les scripts
 add_action('wp_enqueue_scripts', 'oblog_scripts');
 
@@ -69,7 +71,6 @@ function wpb_add_google_fonts() {
     }
      
     add_action( 'wp_enqueue_scripts', 'wpb_add_google_fonts' );
-
 
 
 // Suppressions des inclusions par défaut de WP

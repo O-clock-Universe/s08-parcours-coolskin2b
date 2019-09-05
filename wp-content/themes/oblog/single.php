@@ -11,7 +11,7 @@ get_header();
 <article class="card">
     <div class="card-body">
         <h2 class="card-title"><a href="<?php the_permalink() ?> title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-        <p class="card-text"><?php the_excerpt()?></p>
+        <p class="card-text"><?php the_content()?></p>
         <p class="infos">
             Posté par <a href="#" class="card-link"><?php the_author() ?></a> le <time><?php the_date() ?></time> dans 
             <a href="<?php echo get_category_link(the_category_ID(false)); ?>"
@@ -68,12 +68,18 @@ get_header();
     <div class="card">
         <h3 class="card-header">Auteurs</h3>
         <ul class="list-group list-group-flush">
-                    <?php
-wp_list_authors()
-      ?>
+
+        <?php
+// https://developer.wordpress.org/reference/functions/get_the_category/
+// On récupere toutes les catégories du post actuellement parcouru
+$authors= wp_list_authors();
+
+foreach($authors as $author): ?>
+<?php print_r($author); ?>
+
+<?php endforeach; ?>
         </ul>
     </div>
-
 </aside>
 <?php
 get_footer();

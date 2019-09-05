@@ -3,7 +3,7 @@
 get_header();
 
 ?>
-<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 
 <!-- Je dispose une card: https://getbootstrap.com/docs/4.1/components/card/ -->
@@ -50,40 +50,27 @@ get_header();
     <!-- Catégories: https://getbootstrap.com/docs/4.1/components/card/#list-groups-->
     <div class="card">
 
-    <?php 
-$location = 'Menu de droite';
-if (has_nav_menu($location)) :
-    $menu_obj = get_menu_by_location($location); 
-    wp_nav_menu( array( 
-        'theme_location'  => $location,
-        'items_wrap'=> '<strong>'.esc_html($menu_obj->name).'</strong><ul id="%1$s" class="%2$s">%3$s</ul>',
-        'container' => false,
-        'menu_class' => 'list-group list-group-flush',
-        'add_li_class'  => 'list-group-item'
-    )); 
-endif;
-?>
-
-        <h3 class="card-header">Catégories</h3>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a href="category.html">TeamBack</a></li>
-            <li class="list-group-item"><a href="category.html">TeamFront</a></li>
-            <li class="list-group-item"><a href="category.html">Collaboration</a></li>
-            <li class="list-group-item"><a href="category.html">Ma Vie De Dev</a></li>
-        </ul>
-    </div>
+    
+    <h3 class="card-header">Catégories</h3>
+    <?php
+            // cf : https://developer.wordpress.org/reference/functions/wp_nav_menu/
+            // "theme_location" emplacement de menu défini dans functions.php
+            wp_nav_menu([
+              'theme_location' => 'nav right',
+              'container' => false,
+              'menu_class' => 'list-group list-group-flush',
+              'add_li_class'  => 'list-group-item'
+          ]);
+      ?>
+</div>
 
     <!-- Auteurs: https://getbootstrap.com/docs/4.1/components/card/#list-groups -->
     <div class="card">
         <h3 class="card-header">Auteurs</h3>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Maxime</li>
-            <li class="list-group-item">Anthony</li>
-            <li class="list-group-item">Alexandre</li>
-            <li class="list-group-item">Dario</li>
-            <li class="list-group-item">Julie</li>
-            <li class="list-group-item">Lucie</li>
-            <li class="list-group-item">Xavier</li>
+                    <?php
+wp_list_authors()
+      ?>
         </ul>
     </div>
 

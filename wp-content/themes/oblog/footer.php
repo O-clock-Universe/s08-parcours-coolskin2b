@@ -23,11 +23,15 @@
       <div class="row justify-content-center text-center">
         <div class="col-9 links">
           <!-- Je créé une liste: https://getbootstrap.com/docs/4.1/components/list-group/ -->
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="contact.html">Nous contacter</a></li>
-            <li class="list-inline-item"><a href="qui-sommes-nous.html">Qui sommes nous ?</a></li>
-            <li class="list-inline-item"><a href="mentions-legales.html">Mentions légales</a></li>
-          </ul>
+
+          <?php
+            wp_nav_menu([
+              'theme_location' => 'nav footer',
+              'container' => false,
+              'menu_class' => 'list-inline',
+              'add_li_class'  => 'list-inline-item'
+          ]);
+      ?>
         </div>
       </div>
 
