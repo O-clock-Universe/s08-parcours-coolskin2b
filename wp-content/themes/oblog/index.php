@@ -1,13 +1,12 @@
 <?php
-
+//integre modèle d'en-tête pour un  header.php 
 get_header();
-
 ?>
+<!-- La boucle de Wordpress permet d'afficher des articles et/ou de parametrer l'affichage de ces articles -->
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-
+<!-- j'utilise bootstrap pour afficher les articles dans ce theme -->
 <!-- Je dispose une card: https://getbootstrap.com/docs/4.1/components/card/ -->
-
 <article class="card">
     <div class="card-body">
         <h2 class="card-title"><a href="<?php the_permalink() ?> title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
@@ -17,17 +16,13 @@ get_header();
             <a href="<?php echo get_category_link(the_category_ID(false)); ?>"
             
                 class="card-link">#<?php $cat = get_the_category(); echo $cat[0]->cat_name; ?>
-                
-
         </p>
     </div>
 </article>
 <?php endwhile; endif; ?>
-<!-- Je dispose une card: https://getbootstrap.com/docs/4.1/components/card/ -->
+<!-- fin de la boucle fin de l'affichage des articles -->
 
-
-
-<!-- Je met un element de navigation: https://getbootstrap.com/docs/4.1/components/pagination/ -->
+<!-- Menu de droite -->
 <nav aria-label="Page navigation example" class="sans-bonus">
     <ul class="pagination justify-content-between">
         <li class="page-item"><a class="page-link" href="#"><i class="fas fa-arrow-left"></i> Previous</a></li>
@@ -52,7 +47,7 @@ get_header();
 
     
     <h3 class="card-header">Catégories</h3>
-    <?php
+     <?php
             // cf : https://developer.wordpress.org/reference/functions/wp_nav_menu/
             // "theme_location" emplacement de menu défini dans functions.php
             wp_nav_menu([
@@ -62,22 +57,19 @@ get_header();
               'add_li_class'  => 'list-group-item'
           ]);
       ?>
-</div>
-
-    <!-- Auteurs: https://getbootstrap.com/docs/4.1/components/card/#list-groups -->
+    </div>
     <div class="card">
         <h3 class="card-header">Auteurs</h3>
         <ul class="list-group list-group-flush">
         
-        <?php
-$args2 = array(
+    <?php
+    $args2 = array(
 
-    role’ => ‘authors’,
+    'role' => 'authors',
     
-    ‘orderby’ => ‘display_name’,
+    'orderby' => 'display_name',
     
-    ‘order’ => ‘ASC’
-    
+    'order' => 'ASC'
     );
     $authors = get_users($arg2);
     foreach ($authors as $author) {
@@ -88,4 +80,5 @@ $args2 = array(
 
 </aside>
 <?php
+//integre modèle de footer pour un  footer.php 
 get_footer();

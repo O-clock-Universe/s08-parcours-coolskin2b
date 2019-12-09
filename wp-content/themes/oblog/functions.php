@@ -5,8 +5,6 @@ if (!function_exists('oblog_setup')) :
     function oblog_setup()
     {
         add_theme_support('title-tag');
-
-        // https://github.com/O-clock-Alumni/fiches-recap/blob/master/wordpress/themes/setup-theme.md#menus-de-navigation
         add_theme_support('menus'); // Facultatif car induit par un register_nav_menus
         
         // On enregistre un "emplacement de menu" dans le thème
